@@ -8,10 +8,15 @@
 @import './forms/inputs.scss';
 @import './forms/input-wrapper.scss';
 @import './components/loading.scss';
+@import './components/layouts.scss';
 
 @import './app.scss';
 @import './views/login.scss';
 @import './views/register.scss';
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;

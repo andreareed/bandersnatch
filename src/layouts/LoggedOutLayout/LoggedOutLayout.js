@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class LoggedOutLayout extends Component {
   static propTypes = {
     children: PropTypes.node,
-    logout: PropTypes.func,
     className: PropTypes.string,
   };
 

@@ -1,6 +1,16 @@
 .register {
-  width: 100%;
-  max-width: 400px;
+  min-height: 100vh;
+  min-width: 100vw;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .register__form {
+    width: 100%;
+    max-width: 400px;
+  }
 
   .register__form-helper {
     display: flex;
@@ -11,6 +21,8 @@
 
   h1 {
     color: var(--red);
+    width: 100%;
+    max-width: 400px;
   }
 
   button {

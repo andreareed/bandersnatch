@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 
 import Loading from './common/components/Loading';
 import Register from './views/Register';
 import Login from './views/Login';
 import LoggedOutLayout from './layouts/LoggedOutLayout';
+import LoggedInLayout from './layouts/LoggedInLayout';
 
 import { verifyToken, logout } from './redux/actions';
 
@@ -49,11 +50,22 @@ class App extends Component {
           <Switch>
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="*">
+              <Redirect to="/login" />
+            </Route>
           </Switch>
         </LoggedOutLayout>
       );
     }
-    return <div className="app">Bandersnatch</div>;
+    return (
+      <LoggedInLayout className="app">
+        <Switch>
+          <Route path="*">
+            <Redirect to="/" />
+          </Route>
+        </Switch>
+      </LoggedInLayout>
+    );
   }
 }
 

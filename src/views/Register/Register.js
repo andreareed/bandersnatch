@@ -30,7 +30,6 @@ const validationSchema = Yup.object().shape({
 class Register extends Component {
   static propTypes = {
     registerUser: PropTypes.func.isRequired,
-    onSuccess: PropTypes.func,
   };
 
   state = {
@@ -38,7 +37,7 @@ class Register extends Component {
   };
 
   renderForm = ({ touched, errors, isSubmitting }) => (
-    <Form>
+    <Form className="register__form">
       <InputWrapper label="First Name" required validation={touched.first_name && errors.first_name}>
         <Field type="text" name="first_name" maxLength="64" />
       </InputWrapper>
@@ -83,7 +82,7 @@ class Register extends Component {
             this.props.registerUser(values).then(action => {
               if (action.response.ok) {
                 this.setState({ error: '' });
-                this.props.onSuccess();
+                this.props.history.push('/');
               } else {
                 if (action.json.validationErrors) {
                   action.json.validationErrors.forEach(({ key, message }) => actions.setFieldError(key, message));

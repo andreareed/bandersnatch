@@ -19,7 +19,6 @@ const validationSchema = Yup.object().shape({
 class Login extends Component {
   static propTypes = {
     loginUser: PropTypes.func.isRequired,
-    onSuccess: PropTypes.func,
   };
 
   state = {
@@ -27,7 +26,7 @@ class Login extends Component {
   };
 
   renderForm = ({ touched, errors, isSubmitting }) => (
-    <Form>
+    <Form className="login__form">
       <InputWrapper label="Email" required validation={touched.email && errors.email}>
         <Field type="email" name="email" maxLength="64" />
       </InputWrapper>
@@ -63,7 +62,7 @@ class Login extends Component {
             this.props.loginUser(values).then(action => {
               if (action.response.ok) {
                 this.setState({ error: '' });
-                this.props.onSuccess();
+                this.props.history.push('/');
               } else {
                 if (action.json.message) {
                   this.setState({ error: action.json.message });
