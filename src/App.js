@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
 import localstorage from 'store2';
-import logo from './logo.svg';
+import { Switch, Route } from 'react-router-dom';
+
 import Register from './views/Register';
 import Login from './views/Login';
-import Loading from './common/components/Loading';
+import LoggedOutLayout from './layouts/LoggedOutLayout';
 
 import { verifyToken, logout } from './redux/actions';
 
@@ -38,6 +39,18 @@ class App extends Component {
   };
 
   render() {
+    const { user } = this.props;
+
+    if (!user) {
+      return (
+        <LoggedOutLayout className="app">
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+          </Switch>
+        </LoggedOutLayout>
+      );
+    }
     return <div className="app">Bandersnatch</div>;
   }
 }

@@ -33,38 +33,39 @@ class Login extends Component {
       <InputWrapper label="Password" required validation={touched.password && errors.password}>
         <Field type="password" name="password" maxLength="64" minLength="6" />
       </InputWrapper>
-      <div>
-        <button type="submit" className="btn" disabled={isSubmitting}>
-          Login
-        </button>
-      </div>
+      <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+        Login
+      </button>
       {this.state.error && <div className="form-error">{this.state.error}</div>}
     </Form>
   );
 
   render() {
     return (
-      <Formik
-        initialValues={{
-          email: '',
-          password: '',
-        }}
-        validationSchema={validationSchema}
-        onSubmit={(values, actions) => {
-          this.props.loginUser(values).then(action => {
-            if (action.response.ok) {
-              this.setState({ error: '' });
-              this.props.onSuccess();
-            } else {
-              if (action.json.message) {
-                this.setState({ error: action.json.message });
+      <div className="container login">
+        <h1>Bandersnatch</h1>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+          }}
+          validationSchema={validationSchema}
+          onSubmit={(values, actions) => {
+            this.props.loginUser(values).then(action => {
+              if (action.response.ok) {
+                this.setState({ error: '' });
+                this.props.onSuccess();
+              } else {
+                if (action.json.message) {
+                  this.setState({ error: action.json.message });
+                }
               }
-            }
-            actions.setSubmitting(false);
-          });
-        }}
-        render={this.renderForm}
-      />
+              actions.setSubmitting(false);
+            });
+          }}
+          render={this.renderForm}
+        />
+      </div>
     );
   }
 }
