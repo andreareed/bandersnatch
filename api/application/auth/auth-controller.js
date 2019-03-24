@@ -22,8 +22,9 @@ module.exports = {
     }
 
     user.token = await JWT.sign({ id: user.id }, process.env.JWT_SECRET, {
-      expiresIn: '36h',
+      expiresIn: '14d',
     });
+
     delete user.password;
 
     return user;

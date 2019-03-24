@@ -4,15 +4,13 @@ import localstorage from 'store2';
 
 import { REGISTER_USER, LOGIN_USER, VERIFY_TOKEN, LOGOUT_USER } from './actions';
 
-const loading = (state = false, action) => {
+const token = (state = localstorage.get('token'), action) => {
   switch (action.type) {
-    case `${VERIFY_TOKEN}_REQUEST`:
-      return true;
-
     case `${VERIFY_TOKEN}_SUCCESS`:
-    case `${VERIFY_TOKEN}_FAILURE`:
-      return false;
-
+    case `${REGISTER_USER}_SUCCESS`:
+    case `${LOGIN_USER}_SUCCESS`:
+      localstorage.set('token', action.json.token);
+      return action.json.token;
     default:
       return state;
   }
@@ -21,15 +19,12 @@ const loading = (state = false, action) => {
 const user = (state = null, action) => {
   switch (action.type) {
     case `${REGISTER_USER}_SUCCESS`:
-      localstorage.set('token', action.json.token);
       return fromJS(action.json);
 
     case `${LOGIN_USER}_SUCCESS`:
-      localstorage.set('token', action.json.token);
       return fromJS(action.json);
 
     case `${VERIFY_TOKEN}_SUCCESS`:
-      localstorage.set('token', action.json.token);
       return fromJS(action.json);
 
     case LOGOUT_USER:
@@ -42,6 +37,6 @@ const user = (state = null, action) => {
 };
 
 export default combineReducers({
-  loading,
+  token,
   user,
 });

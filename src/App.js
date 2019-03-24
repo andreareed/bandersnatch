@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
-import localstorage from 'store2';
 import { Switch, Route, withRouter } from 'react-router-dom';
 
+import Loading from './common/components/Loading';
 import Register from './views/Register';
 import Login from './views/Login';
 import LoggedOutLayout from './layouts/LoggedOutLayout';
@@ -14,32 +14,34 @@ import { verifyToken, logout } from './redux/actions';
 class App extends Component {
   static propTypes = {
     user: PropTypes.instanceOf(Map),
-    loading: PropTypes.bool.isRequired,
+    token: PropTypes.string,
     verifyToken: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    const { user, verifyToken } = this.props;
-    if (!user) {
-      const token = localstorage.get('token');
-      if (token) {
-        verifyToken(token).then(action => {
-          if (action.response.ok) {
-            this.setState({ view: 'success' });
-          }
-        });
-      }
+    const { user, token, verifyToken } = this.props;
+    if (!user && token) {
+      verifyToken(token);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { verifyToken, token } = this.props;
+    if (token && prevProps.token !== token) {
+      verifyToken();
     }
   }
 
   logout = () => {
     this.props.logout();
-    this.setState({ view: 'login' });
   };
 
   render() {
-    const { user } = this.props;
+    const { user, token } = this.props;
+    if (token && !user) {
+      return <Loading />;
+    }
 
     if (!user) {
       return (
@@ -58,7 +60,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    loading: state.loading,
+    token: state.token,
   };
 };
 
