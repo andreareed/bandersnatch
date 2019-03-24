@@ -17,7 +17,7 @@ module.exports = {
         if (err.constraint) {
           throw Boom.badData('Email already exists');
         } else {
-          throw Boom.badImplementation('Opps! Something went wrong.');
+          throw Boom.badData('Opps! Something went wrong.');
         }
       });
   },

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 
 import InputWrapper from '../../common/components/forms/InputWrapper';
 
@@ -33,6 +34,14 @@ class Login extends Component {
       <InputWrapper label="Password" required validation={touched.password && errors.password}>
         <Field type="password" name="password" maxLength="64" minLength="6" />
       </InputWrapper>
+      <div className="login__form-helper">
+        <Link to="/register" tabIndex="-1">
+          register
+        </Link>
+        <Link to="/" tabIndex="-1">
+          forgot password
+        </Link>
+      </div>
       <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
         Login
       </button>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 
 import InputWrapper from '../../common/components/forms/InputWrapper';
 
@@ -38,11 +39,7 @@ class Register extends Component {
 
   renderForm = ({ touched, errors, isSubmitting }) => (
     <Form>
-      <InputWrapper
-        label="First Name"
-        required
-        validation={touched.first_name && errors.first_name}
-      >
+      <InputWrapper label="First Name" required validation={touched.first_name && errors.first_name}>
         <Field type="text" name="first_name" maxLength="64" />
       </InputWrapper>
       <InputWrapper label="Last Name" required validation={touched.last_name && errors.last_name}>
@@ -54,52 +51,52 @@ class Register extends Component {
       <InputWrapper label="Password" required validation={touched.password && errors.password}>
         <Field type="password" name="password" maxLength="64" minLength="6" />
       </InputWrapper>
-      <InputWrapper
-        label="Confirm Password"
-        required
-        validation={touched.confirmPassword && errors.confirmPassword}
-      >
+      <InputWrapper label="Confirm Password" required validation={touched.confirmPassword && errors.confirmPassword}>
         <Field type="password" name="confirmPassword" maxLength="64" minLength="6" />
       </InputWrapper>
-      <div>
-        <button type="submit" className="btn" disabled={isSubmitting}>
-          Sign Up
-        </button>
+      <div className="register__form-helper">
+        <Link to="/login" tabIndex="-1">
+          login
+        </Link>
       </div>
+      <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+        Register
+      </button>
       {this.state.error && <div className="form-error">{this.state.error}</div>}
     </Form>
   );
 
   render() {
     return (
-      <Formik
-        initialValues={{
-          first_name: '',
-          last_name: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-        }}
-        validationSchema={validationSchema}
-        onSubmit={(values, actions) => {
-          this.props.registerUser(values).then(action => {
-            if (action.response.ok) {
-              this.setState({ error: '' });
-              this.props.onSuccess();
-            } else {
-              if (action.json.validationErrors) {
-                action.json.validationErrors.forEach(({ key, message }) =>
-                  actions.setFieldError(key, message)
-                );
-              } else if (action.json.message) {
-                this.setState({ error: action.json.message });
+      <div className="container register">
+        <h1>Bandersnatch</h1>
+        <Formik
+          initialValues={{
+            first_name: '',
+            last_name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+          }}
+          validationSchema={validationSchema}
+          onSubmit={(values, actions) => {
+            this.props.registerUser(values).then(action => {
+              if (action.response.ok) {
+                this.setState({ error: '' });
+                this.props.onSuccess();
+              } else {
+                if (action.json.validationErrors) {
+                  action.json.validationErrors.forEach(({ key, message }) => actions.setFieldError(key, message));
+                } else if (action.json.message) {
+                  this.setState({ error: action.json.message });
+                }
               }
-            }
-            actions.setSubmitting(false);
-          });
-        }}
-        render={this.renderForm}
-      />
+              actions.setSubmitting(false);
+            });
+          }}
+          render={this.renderForm}
+        />
+      </div>
     );
   }
 }
