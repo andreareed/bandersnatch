@@ -20,9 +20,4 @@ module.exports = {
     });
     return user;
   },
-
-  async postGameHandler(request) {
-    const { id } = request.auth.credentials;
-    return service.postGame(id);
-  },
 };

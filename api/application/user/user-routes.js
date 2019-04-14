@@ -28,16 +28,6 @@ module.exports = {
           },
         },
       },
-      {
-        method: 'POST',
-        path: '/users/games',
-        handler: controller.postGameHandler,
-        config: {
-          auth: {
-            strategies: ['jwt'],
-          },
-        },
-      },
     ]);
   },
 };

@@ -1,15 +1,20 @@
 import { connect } from 'react-redux';
 import Game from './Game';
 
-import { startNewGame } from './redux/actions';
+import { getGameSaves, startNewGame, loadGame } from './redux/actions';
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    gameSaves: state.game.gameSaves,
+    currentGame: state.game.currentGame,
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    getGameSaves: () => dispatch(getGameSaves()),
     startNewGame: () => dispatch(startNewGame()),
+    loadGame: () => dispatch(loadGame()),
   };
 };
 

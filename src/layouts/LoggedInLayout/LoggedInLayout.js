@@ -12,7 +12,7 @@ class LoggedInLayout extends Component {
     const { children, className } = this.props;
     return (
       <div className={classNames(['loggedInLayout', className])}>
-        <h1 className="loggedInLayout__header">Bandersnatch</h1>
+        {/* <h1 className="loggedInLayout__header">Bandersnatch</h1> */}
         {children}
       </div>
     );

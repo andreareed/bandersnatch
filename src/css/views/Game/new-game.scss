@@ -1,0 +1,29 @@
+.new-game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 50px;
+
+  h1 {
+    font-size: 64px;
+    span {
+      color: var(--red);
+    }
+  }
+
+  .new-game__options {
+    cursor: pointer;
+    margin: 20px;
+
+    div {
+      margin: 20px;
+      font-size: 36px;
+    }
+
+    .disabled {
+      color: #aaa;
+      cursor: not-allowed;
+    }
+  }
+}
