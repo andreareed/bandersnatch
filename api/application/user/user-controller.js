@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const JWT = require('jsonwebtoken');
 
-const service = require('../user/user-service');
+const service = require('./user-service');
 const saltRounds = 12;
 
 module.exports = {
@@ -19,5 +19,10 @@ module.exports = {
       expiresIn: '36h',
     });
     return user;
+  },
+
+  async postGameHandler(request) {
+    const { id } = request.auth.credentials;
+    return service.postGame(id);
   },
 };

@@ -1,5 +1,6 @@
 const Boom = require('boom');
 const User = require('./User');
+const Game = require('./Game');
 
 module.exports = {
   async findById(id) {
@@ -20,5 +21,9 @@ module.exports = {
           throw Boom.badData('Opps! Something went wrong.');
         }
       });
+  },
+
+  async postGame(user_id) {
+    return Game.query().insertAndFetch({ user_id });
   },
 };

@@ -2,6 +2,8 @@ import { combineReducers } from 'redux';
 import { fromJS } from 'immutable';
 import localstorage from 'store2';
 
+import game from '../views/Game/redux/reducers';
+
 import { REGISTER_USER, LOGIN_USER, VERIFY_TOKEN, LOGOUT_USER } from './actions';
 
 const token = (state = localstorage.get('token'), action) => {
@@ -39,4 +41,5 @@ const user = (state = null, action) => {
 export default combineReducers({
   token,
   user,
+  game,
 });
