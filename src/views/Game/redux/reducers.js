@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { fromJS, List, Map } from 'immutable';
+import localstorage from 'store2';
 
 import { GET_GAMES, START_NEW_GAME, LOAD_GAME } from './actions';
 
@@ -20,6 +21,7 @@ const currentGame = (state = Map(), action) => {
   switch (action.type) {
     case `${START_NEW_GAME}_SUCCESS`:
     case `${LOAD_GAME}_SUCCESS`:
+      localstorage.set('gameId', action.json.id);
       return fromJS(action.json);
 
     default:

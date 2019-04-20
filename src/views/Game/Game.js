@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { List } from 'immutable';
+import localstorage from 'store2';
 
 import ChooseGame from './views/ChooseGame';
 
@@ -13,9 +14,14 @@ class Game extends Component {
   };
 
   componentDidMount() {
-    const { getGameSaves } = this.props;
+    const { getGameSaves, loadGame } = this.props;
+    const gameInProgress = localstorage.get('gameId');
 
-    getGameSaves();
+    if (gameInProgress) {
+      loadGame(gameInProgress);
+    } else {
+      getGameSaves();
+    }
   }
 
   render() {
