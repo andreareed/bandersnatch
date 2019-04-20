@@ -3,7 +3,9 @@ const User = require('./User');
 
 module.exports = {
   async findById(id) {
-    return User.query().findById(id);
+    return User.query()
+      .findById(id)
+      .eager('games');
   },
 
   async findByEmail(email) {

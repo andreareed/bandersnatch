@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { fromJS, List, Map } from 'immutable';
 
-import { GET_GAMES, START_NEW_GAME } from './actions';
+import { GET_GAMES, START_NEW_GAME, LOAD_GAME } from './actions';
 
 const gameSaves = (state = List(), action) => {
   switch (action.type) {
@@ -9,7 +9,7 @@ const gameSaves = (state = List(), action) => {
       return fromJS(action.json);
 
     case `${START_NEW_GAME}_SUCCESS`:
-      return state.push(action.json);
+      return state.push(fromJS(action.json));
 
     default:
       return state;
@@ -19,6 +19,7 @@ const gameSaves = (state = List(), action) => {
 const currentGame = (state = Map(), action) => {
   switch (action.type) {
     case `${START_NEW_GAME}_SUCCESS`:
+    case `${LOAD_GAME}_SUCCESS`:
       return fromJS(action.json);
 
     default:

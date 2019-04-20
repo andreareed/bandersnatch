@@ -19,11 +19,7 @@ const validate = async (decoded, request) => {
         first_name: user.first_name,
         last_name: user.last_name,
       },
-      scope: [
-        ...(isVerified ? ['verified'] : []),
-        `user-${user.id}`,
-        //Example: ...user.posts.map(post => `post-${post.id}`),
-      ],
+      scope: [...(isVerified ? ['verified'] : []), `user-${user.id}`, ...user.games.map(game => `game-${game.id}`)],
     };
 
     return { isValid: true, credentials };

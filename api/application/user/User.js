@@ -15,6 +15,19 @@ class User extends Model {
     return 'Invalid user';
   }
 
+  static get relationMappings() {
+    return {
+      games: {
+        relation: Model.HasManyRelation,
+        modelClass: require('../game/Game'),
+        join: {
+          from: 'users.id',
+          to: 'games.user_id',
+        },
+      },
+    };
+  }
+
   $beforeInsert() {
     this.id = uuid.v4();
     this.created_at = new Date().toISOString();

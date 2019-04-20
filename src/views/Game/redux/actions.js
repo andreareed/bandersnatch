@@ -16,5 +16,5 @@ export const startNewGame = () => ({
 
 export const loadGame = gameId => ({
   type: LOAD_GAME,
-  // promise: client.get('/')
+  promise: client.get(`/games/${gameId}`),
 });

@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getGameSaves: () => dispatch(getGameSaves()),
     startNewGame: () => dispatch(startNewGame()),
-    loadGame: () => dispatch(loadGame()),
+    loadGame: id => dispatch(loadGame(id)),
   };
 };
 

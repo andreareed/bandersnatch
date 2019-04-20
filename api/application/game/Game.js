@@ -15,9 +15,23 @@ class Game extends Model {
     return 'Invalid game save';
   }
 
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.HasOneRelation,
+        modelClass: require('../user/User'),
+        join: {
+          from: 'games.user_id',
+          to: 'users.id',
+        },
+      },
+    };
+  }
+
   $beforeInsert() {
     this.id = uuid.v4();
     this.created_at = new Date().toISOString();
+    this.updated_at = new Date().toISOString();
   }
 
   $beforeUpdate() {

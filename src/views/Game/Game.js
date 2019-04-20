@@ -19,13 +19,17 @@ class Game extends Component {
   }
 
   render() {
-    const { startNewGame, gameSaves, loadGame } = this.props;
+    const { startNewGame, gameSaves, loadGame, currentGame } = this.props;
 
-    return (
-      <div>
-        <ChooseGame startNewGame={startNewGame} gameSaves={gameSaves} onContinue={loadGame} />
-      </div>
-    );
+    if (!currentGame.size) {
+      return (
+        <div>
+          <ChooseGame startNewGame={startNewGame} gameSaves={gameSaves} onContinue={loadGame} />
+        </div>
+      );
+    }
+
+    return 'Welcome back';
   }
 }
 

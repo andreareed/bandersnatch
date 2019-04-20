@@ -14,4 +14,8 @@ module.exports = {
     const { id } = request.auth.credentials;
     return service.getGames(id);
   },
+
+  async loadGameHandler(request) {
+    return request.params.game;
+  },
 };
