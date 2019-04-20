@@ -41,14 +41,14 @@ class App extends Component {
 
   render() {
     const { user, token } = this.props;
-    console.log(user);
+
     if (token && !user.get('data')) {
       return <Loading />;
     }
 
     if (!user.get('data')) {
       return (
-        <LoggedOutLayout className="app">
+        <LoggedOutLayout>
           <Switch>
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
@@ -60,7 +60,7 @@ class App extends Component {
       );
     }
     return (
-      <LoggedInLayout className="app">
+      <LoggedInLayout>
         <Switch>
           <Route path="/" component={Game} />
           <Route path="*">

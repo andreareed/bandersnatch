@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { List } from 'immutable';
 
-class NewGame extends Component {
+class ChooseGame extends Component {
   static propTypes = {
     startNewGame: PropTypes.func.isRequired,
     onContinue: PropTypes.func.isRequired,
@@ -38,4 +38,4 @@ class NewGame extends Component {
   }
 }
 
-export default NewGame;
+export default ChooseGame;

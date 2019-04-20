@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { List } from 'immutable';
+import { Map } from 'immutable';
 import localstorage from 'store2';
 
 import ChooseGame from './views/ChooseGame';
+import Loading from '../../common/components/Loading';
 
 class Game extends Component {
   static propTypes = {
     startNewGame: PropTypes.func.isRequired,
     getGameSaves: PropTypes.func.isRequired,
     loadGame: PropTypes.func.isRequired,
-    gameSaves: PropTypes.instanceOf(List).isRequired,
+    gameSaves: PropTypes.instanceOf(Map).isRequired,
   };
 
   componentDidMount() {
@@ -27,10 +28,14 @@ class Game extends Component {
   render() {
     const { startNewGame, gameSaves, loadGame, currentGame } = this.props;
 
+    if (!currentGame.get('loaded')) {
+      return <Loading />;
+    }
+
     if (!currentGame.get('data').size) {
       return (
         <div>
-          <ChooseGame startNewGame={startNewGame} gameSaves={gameSaves} onContinue={loadGame} />
+          <ChooseGame startNewGame={startNewGame} gameSaves={gameSaves.get('data')} onContinue={loadGame} />
         </div>
       );
     }

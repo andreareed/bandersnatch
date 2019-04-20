@@ -10,7 +10,6 @@
 @import './components/loading.scss';
 @import './components/layouts.scss';
 
-@import './app.scss';
 @import './views/login.scss';
 @import './views/register.scss';
 @import './views/Game/new-game.scss';
@@ -21,10 +20,13 @@
 
 body {
   margin: 0;
-  padding: 0;
+  padding: 10px 0;
   font-family: 'Special Elite', 'Roboto', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34;
+  color: #fff;
+  min-height: 100vh;
 }
 
 code {
