@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { fromJS } from 'immutable';
 import localstorage from 'store2';
+import getDefaultState from '../common/utils/defaultReduxState';
 
 import game from '../views/Game/redux/reducers';
 
@@ -18,20 +19,40 @@ const token = (state = localstorage.get('token'), action) => {
   }
 };
 
-const user = (state = null, action) => {
+const user = (state = getDefaultState(null), action) => {
   switch (action.type) {
+    case `${REGISTER_USER}_REQUEST`:
+    case `${LOGIN_USER}_REQUEST`:
+    case `${VERIFY_TOKEN}_REQUEST`:
+      return state.merge({
+        loaded: false,
+        loading: true,
+        error: null,
+      });
+
     case `${REGISTER_USER}_SUCCESS`:
-      return fromJS(action.json);
-
     case `${LOGIN_USER}_SUCCESS`:
-      return fromJS(action.json);
-
     case `${VERIFY_TOKEN}_SUCCESS`:
-      return fromJS(action.json);
+      return state.merge({
+        data: fromJS(action.json),
+        loaded: true,
+        loading: false,
+        error: null,
+      });
 
     case LOGOUT_USER:
       localstorage.clear();
-      return null;
+      return getDefaultState(null);
+
+    case `${REGISTER_USER}_FAILURE`:
+    case `${LOGIN_USER}_FAILURE`:
+    case `${VERIFY_TOKEN}_FAILURE`:
+      return state.merge({
+        data: null,
+        loaded: true,
+        loading: false,
+        error: action.error,
+      });
 
     default:
       return state;

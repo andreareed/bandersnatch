@@ -27,7 +27,7 @@ class Game extends Component {
   render() {
     const { startNewGame, gameSaves, loadGame, currentGame } = this.props;
 
-    if (!currentGame.size) {
+    if (!currentGame.get('data').size) {
       return (
         <div>
           <ChooseGame startNewGame={startNewGame} gameSaves={gameSaves} onContinue={loadGame} />

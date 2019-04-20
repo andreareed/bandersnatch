@@ -23,7 +23,7 @@ class App extends Component {
 
   componentDidMount() {
     const { user, token, verifyToken } = this.props;
-    if (!user && token) {
+    if (!user.get('data') && token) {
       verifyToken(token);
     }
   }
@@ -41,11 +41,12 @@ class App extends Component {
 
   render() {
     const { user, token } = this.props;
-    if (token && !user) {
+    console.log(user);
+    if (token && !user.get('data')) {
       return <Loading />;
     }
 
-    if (!user) {
+    if (!user.get('data')) {
       return (
         <LoggedOutLayout className="app">
           <Switch>
