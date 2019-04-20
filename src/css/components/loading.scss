@@ -6,17 +6,47 @@
   align-items: center;
   flex-direction: column;
 
-  .loading-icon {
-    fill: #fff;
-    animation: logo-spin infinite 2s linear;
+  h1 {
+    font-size: 64px;
+    color: var(--red);
+    margin: 0;
   }
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.loading-bars {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.loading-bars div {
+  display: inline-block;
+  position: absolute;
+  left: 6px;
+  width: 13px;
+  background: #fff;
+  animation: loading-bars 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.loading-bars div:nth-child(1) {
+  left: 6px;
+  animation-delay: -0.24s;
+}
+.loading-bars div:nth-child(2) {
+  left: 26px;
+  animation-delay: -0.12s;
+}
+.loading-bars div:nth-child(3) {
+  left: 45px;
+  animation-delay: 0;
+}
+@keyframes loading-bars {
+  0% {
+    top: 6px;
+    height: 51px;
   }
-  to {
-    transform: rotate(360deg);
+  50%,
+  100% {
+    top: 19px;
+    height: 26px;
   }
 }

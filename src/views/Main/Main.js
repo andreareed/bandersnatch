@@ -6,7 +6,7 @@ import localstorage from 'store2';
 import ChooseGame from './views/ChooseGame';
 import Loading from '../../common/components/Loading';
 
-class Game extends Component {
+class Main extends Component {
   static propTypes = {
     startNewGame: PropTypes.func.isRequired,
     getGameSaves: PropTypes.func.isRequired,
@@ -44,4 +44,4 @@ class Game extends Component {
   }
 }
 
-export default Game;
+export default Main;

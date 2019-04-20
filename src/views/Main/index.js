@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Game from './Game';
+import Main from './Main';
 
 import { getGameSaves, startNewGame, loadGame } from './redux/actions';
 
@@ -21,4 +21,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Game);
+)(Main);

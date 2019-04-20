@@ -7,7 +7,7 @@ import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import Loading from './common/components/Loading';
 import Register from './views/Register';
 import Login from './views/Login';
-import Game from './views/Game';
+import Main from './views/Main';
 import LoggedOutLayout from './layouts/LoggedOutLayout';
 import LoggedInLayout from './layouts/LoggedInLayout';
 
@@ -62,7 +62,7 @@ class App extends Component {
     return (
       <LoggedInLayout>
         <Switch>
-          <Route path="/" component={Game} />
+          <Route path="/" component={Main} />
           <Route path="*">
             <Redirect to="/" />
           </Route>

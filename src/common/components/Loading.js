@@ -1,10 +1,14 @@
 import React from 'react';
-import Icon from './Icon/Icon';
 
 const Loading = () => {
   return (
     <div className="loading-wrapper">
-      <Icon icon="Loading" />
+      <h1>B</h1>
+      <div className="loading-bars">
+        <div />
+        <div />
+        <div />
+      </div>
     </div>
   );
 };
