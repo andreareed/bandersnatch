@@ -6,8 +6,8 @@ const saltRounds = 12;
 
 module.exports = {
   async postGameHandler(request) {
-    const { auth, payload } = request;
-    return service.postGame(auth.credentials.id, payload.room_id);
+    const { id } = request.auth.credentials;
+    return service.postGame(id);
   },
 
   async getGamesHandler(request) {

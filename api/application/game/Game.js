@@ -1,6 +1,6 @@
 const Knex = require('knex');
 const uuid = require('uuid');
-const connection = require('../../knexfile');
+const connection = require('../../../knexfile');
 const { Model } = require('objection');
 const knexConnection = Knex(connection);
 
@@ -25,6 +25,14 @@ class Game extends Model {
           to: 'users.id',
         },
       },
+      // room: {
+      //   relation: Model.HasOneRelation,
+      //   modelClass: require('../room/Rooms'),
+      //   join: {
+      //     from: 'games.room_id',
+      //     to: 'rooms.id',
+      //   },
+      // },
     };
   }
 

@@ -31,7 +31,7 @@ class App extends Component {
   componentDidUpdate(prevProps) {
     const { verifyToken, token } = this.props;
     if (token && prevProps.token !== token) {
-      verifyToken();
+      verifyToken(token);
     }
   }
 
@@ -42,7 +42,7 @@ class App extends Component {
   render() {
     const { user, token } = this.props;
 
-    if (token && !user.get('data')) {
+    if (token && user.get('loading')) {
       return <Loading />;
     }
 

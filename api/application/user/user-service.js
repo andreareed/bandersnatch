@@ -5,7 +5,7 @@ module.exports = {
   async findById(id) {
     return User.query()
       .findById(id)
-      .eager('games');
+      .eager({ games: true });
   },
 
   async findByEmail(email) {

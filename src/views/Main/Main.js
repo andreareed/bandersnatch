@@ -4,6 +4,7 @@ import { Map } from 'immutable';
 import localstorage from 'store2';
 
 import ChooseGame from './views/ChooseGame';
+import Game from './views/Game';
 import Loading from '../../common/components/Loading';
 
 class Main extends Component {
@@ -28,7 +29,7 @@ class Main extends Component {
   render() {
     const { startNewGame, gameSaves, loadGame, currentGame } = this.props;
 
-    if (!currentGame.get('loaded')) {
+    if (currentGame.get('loading')) {
       return <Loading />;
     }
 
@@ -40,7 +41,7 @@ class Main extends Component {
       );
     }
 
-    return 'Welcome back';
+    return <Game game={currentGame} />;
   }
 }
 

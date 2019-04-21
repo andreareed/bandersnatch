@@ -11,7 +11,7 @@ export const getGameSaves = () => ({
 
 export const startNewGame = () => ({
   type: START_NEW_GAME,
-  promise: client.post('/games'),
+  promise: client.post('/games', { room_id: 'cd345fe8-6f65-4684-93f5-af1ad142157e' }),
 });
 
 export const loadGame = gameId => ({

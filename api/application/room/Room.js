@@ -6,32 +6,27 @@ const knexConnection = Knex(connection);
 
 Model.knex(knexConnection);
 
-class User extends Model {
+class Room extends Model {
   static get tableName() {
-    return 'users';
+    return 'rooms';
   }
 
   static get notFoundMessage() {
-    return 'Invalid user';
+    return 'Invalid room';
   }
 
   static get relationMappings() {
     return {
-      games: {
+      game: {
         relation: Model.HasManyRelation,
         modelClass: require('../game/Game'),
         join: {
-          from: 'users.id',
-          to: 'games.user_id',
+          from: 'games.room_id',
+          to: 'rooms.id',
         },
       },
     };
   }
-
-  $beforeInsert() {
-    this.id = uuid.v4();
-    this.created_at = new Date().toISOString();
-  }
 }
 
-module.exports = User;
+module.exports = Room;

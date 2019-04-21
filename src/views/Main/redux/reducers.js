@@ -32,6 +32,7 @@ const gameSaves = (state = getDefaultState(List()), action) => {
       });
 
     case `${START_NEW_GAME}_FAILURE`:
+    case `${GET_GAMES}_FAILURE`:
       return state.merge({
         data: List(),
         loaded: true,
@@ -47,7 +48,7 @@ const gameSaves = (state = getDefaultState(List()), action) => {
 const currentGame = (state = getDefaultState(Map()), action) => {
   switch (action.type) {
     case `${START_NEW_GAME}_REQUEST`:
-    case `${GET_GAMES}_REQUEST`:
+    case `${LOAD_GAME}_REQUEST`:
       return state.merge({
         loaded: false,
         loading: true,

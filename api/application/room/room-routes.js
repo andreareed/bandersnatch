@@ -19,13 +19,6 @@ module.exports = {
           auth: {
             strategies: ['jwt'],
           },
-          validate: {
-            payload: {
-              room_id: Joi.string()
-                .uuid()
-                .required(),
-            },
-          },
         },
       },
       {

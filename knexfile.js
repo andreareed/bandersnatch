@@ -1,4 +1,4 @@
-const config = require('./config');
+const config = require('./api/config');
 
 module.exports = {
   client: 'postgresql',

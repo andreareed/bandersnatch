@@ -3,7 +3,7 @@ import { fromJS } from 'immutable';
 import localstorage from 'store2';
 import getDefaultState from '../common/utils/defaultReduxState';
 
-import game from '../views/Game/redux/reducers';
+import game from '../views/Main/redux/reducers';
 
 import { REGISTER_USER, LOGIN_USER, VERIFY_TOKEN, LOGOUT_USER } from './actions';
 
